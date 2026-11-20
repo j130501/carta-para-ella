@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101d32" />
+  <meta name="description" content="Una carta para ti, mi chica misteriosa." />
+  <title>Para ti, mi chica misteriosa ✦</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --night:#101b30; --night2:#1b2c41; --cream:#fff8eb;
+      --ink:#524a46; --rose:#b87184; --gold:#e5bf8b;
+      --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+      --reading:'Libre Baskerville',Georgia,serif;
+      --sans:'DM Sans',Arial,sans-serif;
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-height:100svh; background:var(--night); color:#f7eddd; font-family:var(--sans); overflow-x:hidden; }
+    button, input { font:inherit; }
+    button { -webkit-tap-highlight-color:transparent; }
+    button:focus-visible, label:focus-visible { outline:3px solid #fff1c4; outline-offset:5px; }
+    .background { position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none;
+      background:
+        radial-gradient(ellipse 55% 45% at 77% 21%, #4b4660aa 0%, transparent 78%),
+        radial-gradient(ellipse 56% 55% at 11% 77%, #284356b3 0%, transparent 77%),
+        linear-gradient(155deg,#0f1b31 0%,#25394b 47%,#352b41 100%);
+    }
+    .background::after { content:""; position:absolute; inset:0; opacity:.4;
+      background-image:radial-gradient(#fbebcd 0.7px,transparent 1px),radial-gradient(#fdf1dc 0.75px,transparent 1px);
+      background-size:92px 97px, 139px 163px; background-position:9px 14px,47px 61px;
+      animation:twinkle 11s ease-in-out infinite alternate; }
+    .moon { position:absolute; right:17%; top:13%; width:96px; aspect-ratio:1; border-radius:50%; opacity:.45;
+      background:#faf1db; box-shadow:0 0 55px 18px #ffedd77a, 0 0 140px 42px #ffedd724; }
+    .light-haze {position:absolute; left:-10%; right:-10%; bottom:-28%; height:65%; border-radius:50%; background:radial-gradient(ellipse, #ba828a15, transparent 67%);}
+    .petal { position:fixed; top:-5vh; left:var(--x); z-index:0; pointer-events:none; width:var(--size); height:calc(var(--size)*.65); background:linear-gradient(135deg,#e1a9b2bb,#d6a1aa36);
+      border-radius:85% 8% 85% 18%; filter:blur(.15px); opacity:.43; transform:rotate(var(--rotate)); animation:drift var(--duration) linear var(--delay) infinite; }
+    @keyframes drift {0%{transform:translate3d(-4vw,-12vh,0) rotate(0deg);opacity:0} 12%{opacity:.55} 83%{opacity:.38} 100%{transform:translate3d(17vw,110vh,0) rotate(410deg);opacity:0}}
+    @keyframes twinkle {from{opacity:.25} to{opacity:.55}}
+    .noise {position:fixed;inset:0;z-index:7;opacity:.08;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E")}
+    .site-decoration {position:fixed;bottom:0;left:0;width:100%;height:25vh;pointer-events:none;z-index:-1;opacity:.28}
+    .ornament {display:flex;align-items:center;justify-content:center;gap:14px;color:#ebc89c;font-family:var(--serif);font-size:22px;line-height:1}
+    .ornament:before,.ornament:after{content:"";width:45px;height:1px;background:linear-gradient(90deg,transparent,#d7ac88)}
+    .ornament:after{transform:rotate(180deg)}
+    .cover {position:relative; min-height:100svh; width:100%; display:flex;flex-direction:column; align-items:center;justify-content:center; gap:18px; padding:75px 22px 68px; text-align:center; transition:opacity .45s ease,transform .65s ease;}
+    .cover.vanish {opacity:0;transform:translateY(-22px);pointer-events:none}
+    .eyebrow {margin:0;letter-spacing:.35em;color:#e9d6bd;text-transform:uppercase;font-size:10px;font-weight:700;}
+    .cover h1 {font-family:var(--serif);font-size:clamp(55px,8vw,91px);font-weight:400;line-height:.96; margin:2px auto 0; max-width:850px; text-shadow:0 10px 35px #090d20a0;}
+    .cover h1 em {display:block;color:#f1cad0;font-weight:400;}
+    .cover-sub {max-width:400px;color:#e6d8ce; font-family:var(--serif);font-size:clamp(19px,2.5vw,25px);font-style:italic;line-height:1.35;margin:0;}
+    .env-trigger {display:block;position:relative;border:0;background:none;cursor:pointer;margin:4px auto 0;padding:0;width:min(390px,88vw);height:244px;perspective:850px;filter:drop-shadow(0 25px 27px #06091862);}
+    .envelope {display:block;position:relative;width:100%;height:100%;transition:transform .5s ease;}
+    .env-trigger:hover .envelope {transform:translateY(-5px)}
+    .env-back {position:absolute;left:3%;right:3%;bottom:7px;height:201px;border-radius:7px;background:linear-gradient(125deg,#deb9aa,#bb8693 61%,#cf9da4);box-shadow:inset 0 2px 12px #724a5629;}
+    .env-letter {position:absolute;z-index:2;left:13%;width:74%;height:166px;bottom:24px;background:linear-gradient(130deg,#fffaf0,#e9dfd0);border:1px solid #ffffffc7;border-radius:3px;box-shadow:0 7px 14px #53344738;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:24px 10px 17px; transition:transform .9s cubic-bezier(.21,.9,.23,1),opacity .9s;}
+    .env-letter:before {content:"";width:30px;height:31px;border:1px solid #bf94a0;border-radius:50%;background:radial-gradient(circle,#b67c8b 2px,transparent 2.5px);}
+    .env-letter-text {font:italic 24px/1 var(--serif);color:#a46b7c;}
+    .env-letter-line {width:70%;height:1px;background:#d7bfc0;opacity:.9;}
+    .env-left {position:absolute;z-index:4;left:3%;right:3%;bottom:7px;height:201px;background:linear-gradient(125deg,#e7bdb1,#c68f9c);clip-path:polygon(0 0,52% 59%,0 100%);border-radius:7px;}
+    .env-right {position:absolute;z-index:4;left:3%;right:3%;bottom:7px;height:201px;background:linear-gradient(220deg,#e7c0b8,#c8919b);clip-path:polygon(100% 0,48% 59%,100% 100%);border-radius:7px;}
+    .env-bottom {position:absolute;z-index:5;left:3%;right:3%;bottom:7px;height:201px;background:linear-gradient(140deg,#e8bfb6,#cc929e);clip-path:polygon(0 100%,50% 43%,100% 100%);border-radius:7px;}
+    .env-flap {position:absolute;z-index:6;left:3%;right:3%;top:36px;height:201px;background:linear-gradient(160deg,#f0cfc2,#d7a4aa);clip-path:polygon(0 0,100% 0,50% 61%);transform-origin:50% 0;backface-visibility:hidden;transition:transform .74s cubic-bezier(.22,.78,.22,1);border-radius:7px;}
+    .wax {position:absolute;z-index:7;bottom:67px;left:calc(50% - 26px);width:52px;height:52px;border-radius:45% 53% 47% 48%;background:radial-gradient(circle at 30% 25%,#d5899b,#975169 80%);border:3px double #f4b5bd75;box-shadow:0 3px 8px #75445473,inset 0 0 0 5px #ffffff11;display:grid;place-items:center;color:#f8e8dc;font-size:26px;transition:opacity .25s ease,transform .4s ease;}
+    .wax svg {width:23px;height:23px;fill:currentColor;}
+    .cover.is-opening .env-flap {transform:rotateX(180deg);z-index:1}
+    .cover.is-opening .wax {opacity:0;transform:scale(.5)}
+    .cover.is-opening .env-letter {transform:translateY(-102px);transition-delay:.42s}
+    .cover.is-opening .env-trigger {pointer-events:none}
+    .primary {border:1px solid #f8e3c36b;border-radius:999px;background:#ebd4b7;color:#3b3140;padding:15px 30px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;box-shadow:0 8px 30px #0c10255c;cursor:pointer;transition:transform .2s ease,background .2s ease;}
+    .primary:hover {background:#f7e6d0;transform:translateY(-2px)}
+    .cover-foot {font:italic 17px var(--serif);color:#cabbc4;margin:1px 0 0}
+    .reader {display:none;opacity:0;transition:opacity .65s ease;padding:72px 20px 38px;min-height:100svh}
+    .reader.visible {display:block;opacity:1}
+    .reader-head {max-width:780px;margin:0 auto 23px;display:flex;justify-content:space-between;align-items:center;gap:18px;}
+    .reader-brand {font:italic 24px/1 var(--serif);color:#edd5c8;}
+    .plain-button {border:1px solid #f6e9dc66;background:#ffffff0a;border-radius:999px;padding:10px 18px;color:#eee0d6;font-size:12px;cursor:pointer;transition:background .2s ease;}
+    .plain-button:hover {background:#ffffff1f}
+    .sheet-stage {max-width:780px;margin:0 auto;position:relative;perspective:1400px;}
+    .sheet-stage:before {content:"";position:absolute;inset:8px -7px -9px 9px;background:#e8d7c3;border-radius:4px;transform:rotate(1.2deg);box-shadow:0 12px 42px #02040d4a;}
+    .sheet {position:relative;min-height:530px;padding:clamp(38px,7vw,70px) clamp(26px,6.5vw,70px) 54px;border:1px solid #fffcf2;border-radius:3px; color:var(--ink); overflow:hidden;
+      background:
+        radial-gradient(ellipse at 10% 0%,#fffefa 0,transparent 55%),
+        radial-gradient(ellipse at 95% 95%,#edd7c5a3 0,transparent 66%),
+        repeating-linear-gradient(0deg,#ffffff10 0px,#ffffff10 2px,transparent 2px,transparent 6px),
+        #faf1e5;
+      box-shadow:0 20px 70px #06081c77,inset 0 0 60px #bb97771b;
+      transform-origin: left center;
+    }
+    .sheet.turn-out-next {animation:turnOutNext .29s ease-in both}
+    .sheet.turn-in-next {animation:turnInNext .52s cubic-bezier(.2,.7,.2,1) both}
+    .sheet.turn-out-prev {animation:turnOutPrev .29s ease-in both}
+    .sheet.turn-in-prev {animation:turnInPrev .52s cubic-bezier(.2,.7,.2,1) both}
+    @keyframes turnOutNext {to{opacity:0;transform:rotateY(-11deg) translateX(-16px)}}
+    @keyframes turnInNext {from{opacity:0;transform:rotateY(12deg) translateX(19px)}to{opacity:1;transform:none}}
+    @keyframes turnOutPrev {to{opacity:0;transform:rotateY(11deg) translateX(16px)}}
+    @keyframes turnInPrev {from{opacity:0;transform:rotateY(-12deg) translateX(-19px)}to{opacity:1;transform:none}}
+    .sheet-top {display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 10px var(--sans);color:#a68280;letter-spacing:.22em;text-transform:uppercase;}
+    .sheet-top .page-label {white-space:nowrap;}
+    .sheet-ornament {color:#c69a88;font:22px/1 var(--serif);text-align:center;padding-top:22px;}
+    .sheet-title {font:italic 500 clamp(35px,5.9vw,52px)/1.08 var(--serif);text-align:center;color:#a66d7a;margin:4px 0 29px;}
+    .letter-body {font:400 clamp(14px,1.9vw,16.4px)/2 var(--reading);letter-spacing:-.012em;color:#514c4b;overflow-wrap:break-word;}
+    .letter-body p {margin:0 0 17px;}
+    .letter-body .highlight {text-align:center;font:italic 500 clamp(28px,5.6vw,44px)/1.14 var(--serif);color:#a76b7b;margin:24px auto;max-width:490px;}
+    .ink-sign {margin:34px 0 0;text-align:right;font:italic 28px/1.1 var(--serif);color:#a76f7f;}
+    .sheet-bottom {position:relative;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:31px; color:#ba9b90;font:italic 18px var(--serif)}
+    .sheet-bottom:before,.sheet-bottom:after {content:"";width:70px;max-width:23%;height:1px;background:#dec6b6}
+    .reader-controls {max-width:780px;margin:25px auto 0;display:flex;flex-direction:column;gap:18px;align-items:center;}
+    .progress {width:100%;display:flex;gap:7px;justify-content:center;align-items:center;}
+    .progress .dot {height:3px;border-radius:99px;flex:1;max-width:75px;background:#ffffff3d;transition:background .4s;}
+    .progress .dot.active {background:#f3cfb0;box-shadow:0 0 12px #dfab9899}
+    .progress .dot.past {background:#a98d8e}
+    .navigation {display:flex;justify-content:space-between;gap:12px;align-items:center;width:100%;}
+    .nav-btn {display:flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;border:1px solid #d9c6b55b;color:#f2e6d9;padding:13px 20px;background:#ffffff12;min-height:46px;cursor:pointer;white-space:nowrap;font:600 12px var(--sans);letter-spacing:.04em;transition:background .2s,transform .2s;}
+    .nav-btn:hover:not(:disabled){background:#ffffff2c;transform:translateY(-2px)}
+    .nav-btn.primary-nav {background:#f0d9c0;border:1px solid #f0d9c0;color:#493d43;}
+    .nav-btn.primary-nav:hover {background:#fff0dd}
+    .nav-btn:disabled {opacity:.24;cursor:not-allowed}
+    .nav-btn svg {width:17px;height:17px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .page-meta {font:italic 21px var(--serif);color:#dfccbf;min-width:75px;text-align:center}
+    .reader-message {color:#bfadb5;font:italic 17px var(--serif);text-align:center;margin:17px auto 0;}
+    .sound-wrap {position:fixed;z-index:15;right:max(14px,env(safe-area-inset-right));top:max(15px,env(safe-area-inset-top));display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+    .sound-button {display:flex;align-items:center;gap:9px;border:1px solid #eddac287;border-radius:999px;padding:11px 15px;background:#18243be0;backdrop-filter:blur(20px);color:#f7e9d7;box-shadow:0 7px 24px #0005;cursor:pointer;font-size:12px;letter-spacing:.01em;}
+    .sound-button .sound-icon {font-size:17px;line-height:1}
+    .sound-button.is-playing .sound-icon {animation:bobbing 1.6s ease-in-out infinite}
+    @keyframes bobbing {50%{transform:translateY(-2px)}}
+    .sound-panel {display:none;width:min(296px,calc(100vw - 30px));padding:17px 17px 15px;border:1px solid #e5c8ab70;border-radius:16px;color:#e9d9d0;background:#18263ef5;box-shadow:0 13px 40px #040916aa;backdrop-filter:blur(24px);text-align:left;}
+    .sound-panel.open {display:block}
+    .sound-panel strong {display:block;margin:0 0 8px;font:500 22px var(--serif);color:#fff2df}
+    .sound-panel p {font:12px/1.6 var(--sans);margin:0 0 11px;color:#cfc0c2}
+    .upload {display:block;cursor:pointer;border:1px solid #f0d8bc7b;border-radius:8px;padding:12px 14px;font-weight:700;font-size:12px;text-align:center;color:#f4dfc7;}
+    .upload:hover {background:#ffffff17}
+    .upload input {display:none}
+    .music-hint {display:block;margin-top:9px;color:#c2aebb;font:italic 14px var(--serif)}
+    .music-action {margin-top:10px;border:0;background:none;padding:3px 0;color:#f0c6b8;text-decoration:underline;cursor:pointer;font-size:12px}
+    @media(min-width:850px) { .cover {gap:20px} .cover h1{margin-top:1px} }
+    @media(max-width:600px) {
+      .moon {width:74px;right:13%;top:15%;}
+      .cover {padding:78px 17px 48px;gap:14px;justify-content:center}
+      .cover h1 {font-size:clamp(50px,12vw,68px)}
+      .cover-sub {font-size:20px;max-width:290px}
+      .env-trigger {height:223px;width:min(350px,95vw);margin-top:0;transform:scale(.91);transform-origin:center center}
+      .cover .primary {margin-top:-7px}
+      .cover-foot {font-size:16px}
+      .reader {padding:74px 14px 30px}
+      .reader-head {margin-bottom:15px}
+      .reader-brand {font-size:21px}
+      .plain-button {font-size:11px;padding:9px 13px}
+      .sheet {min-height:480px;padding:36px 25px 40px}
+      .sheet-title {font-size:39px;margin-bottom:22px}
+      .letter-body {font-size:14px;line-height:2.04}
+      .sheet-top {font-size:9px;letter-spacing:.15em}
+      .reader-controls {margin-top:22px;gap:17px}
+      .nav-btn {padding:12px 13px;gap:4px;font-size:11px}
+      .page-meta{font-size:18px;min-width:56px}
+      .reader-message {font-size:15px}
+    }
+    @media(max-width:355px) { .nav-btn{font-size:10px;padding:11px} .sheet{padding:30px 20px 32px}.cover h1{font-size:46px}}
+    @media(prefers-reduced-motion: reduce){*,*::before,*::after {animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="background" aria-hidden="true"><div class="moon"></div><div class="light-haze"></div></div>
+  <svg class="site-decoration" aria-hidden="true" viewBox="0 0 1440 230" preserveAspectRatio="none">
+    <path d="M0 170C170 132 267 191 435 160S697 179 848 155s284-30 592 7v70H0Z" fill="#182b3b" />
+    <path d="M0 198c207-36 284 7 443-9s302-30 445-4 355-3 552-3v50H0Z" fill="#080e24" opacity=".7"/>
+  </svg>
+  <div id="petals" aria-hidden="true"></div><div class="noise" aria-hidden="true"></div>
+
+  <aside class="sound-wrap" aria-label="Música de la carta">
+    <button class="sound-button" id="soundButton" type="button" aria-expanded="false" aria-controls="soundPanel">
+      <span class="sound-icon" id="soundIcon" aria-hidden="true">♫</span><span id="soundLabel">Añadir música</span>
+    </button>
+    <div class="sound-panel" id="soundPanel">
+      <strong>La melodía de este recuerdo</strong>
+      <p>Elige el audio de la escena para que suene mientras lees. La música empezará cuando pulses «Abrir mi carta» o «Reproducir».</p>
+      <label class="upload" for="audioFile">Elegir canción desde mi dispositivo<input id="audioFile" type="file" accept="audio/*" /></label>
+      <span class="music-hint" id="musicHint">También puedes colocar un archivo llamado <b>cancion.mp3</b> junto a esta página.</span>
+      <button class="music-action" id="musicAction" type="button" hidden>▶ Reproducir canción</button>
+    </div>
+  </aside>
+
+  <main>
+    <section class="cover" id="cover" aria-label="Portada de la carta">
+      <p class="eyebrow">Una carta · De mi corazón al tuyo</p>
+      <div class="ornament" aria-hidden="true">✧</div>
+      <h1>Dedicado <em>para ti.</em></h1>
+      <p class="cover-sub">Hay algo que llevo guardado desde niño y que, sin saberlo, me llevaba hasta ti.</p>
+      <button class="env-trigger" id="envelopeButton" type="button" aria-label="Abrir el sobre y leer la carta">
+        <span class="envelope" aria-hidden="true">
+          <span class="env-back"></span>
+          <span class="env-letter"><span class="env-letter-text">Para ti, siempre</span><span class="env-letter-line"></span></span>
+          <span class="env-left"></span><span class="env-right"></span><span class="env-bottom"></span>
+          <span class="env-flap"></span>
+          <span class="wax"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3c-.3 0-.7-.2-1-.4C7.3 16.6 3 13.7 3 9.3A5 5 0 0 1 12 6a5 5 0 0 1 9 3.3c0 4.4-4.3 7.3-8 10.6-.3.2-.7.4-1 .4Z"/></svg></span>
+        </span>
+      </button>
+      <button class="primary" id="openButton" type="button">Abrir mi carta <span aria-hidden="true">✧</span></button>
+      <p class="cover-foot">Un recuerdo, ocho hojas y todo lo que siento por ti.</p>
+    </section>
+
+    <section class="reader" id="reader" aria-label="La carta" aria-hidden="true">
+      <div class="reader-head"><span class="reader-brand">Para mi chica misteriosa ✧</span><button class="plain-button" type="button" id="closeButton">Volver al sobre</button></div>
+      <div class="sheet-stage"><article class="sheet" id="sheet" aria-live="polite" aria-atomic="true">
+        <div class="sheet-top"><span>De mí, para ti</span><span class="page-label" id="sheetCounter">Hoja 01 · 08</span></div>
+        <div class="sheet-ornament" aria-hidden="true">✧</div><h2 class="sheet-title" id="sheetTitle"></h2>
+        <div class="letter-body" id="letterBody"></div>
+        <div class="sheet-bottom" aria-hidden="true">♡</div>
+      </article></div>
+      <div class="reader-controls">
+        <div class="progress" id="progress" aria-label="Progreso de lectura"></div>
+        <div class="navigation">
+          <button class="nav-btn" type="button" id="prevButton"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg> Hoja anterior</button>
+          <span class="page-meta" id="pageMeta" aria-live="off">01 / 08</span>
+          <button class="nav-btn primary-nav" type="button" id="nextButton">Siguiente hoja <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </div>
+      <p class="reader-message">No tienes que leerla deprisa. Cada hoja es un pedacito de mí.</p>
+    </section>
+  </main>
+
+  <script>
+    'use strict';
+    // El texto de la carta está distribuido en ocho hojas. La lectura no avanza automáticamente.
+    const pages = [
+      {
+        title: 'Lo que me duele',
+        parts: [{type:'text',text:`Quería hablarte sobre el viaje que ya no podré hacer. Sé que, a estas alturas, muchas de las cosas que pueda decirte podrían sonar a excusas. Y también sé que, por más que intente explicarte lo que pasó, ninguna explicación va a cambiar el hecho de que no podré estar contigo cuando tanto quisiera hacerlo. Podría contarte que busqué distintas maneras de viajar, que intenté encontrar la mejor opción para llegar a ti, pero no sé si saberlo haría que te doliera menos. Y tampoco quiero que mis explicaciones se conviertan en una manera de justificar mi ausencia. Solo quisiera poder expresarte cuánto me duele también no poder verte. Porque te extraño. Te extraño muchísimo.`}]
+      },
+      {
+        title: 'Volver a encontrarte',
+        parts: [{type:'text',text:`Han pasado tantos días sin verte, y siento que hay una parte de mí que se ha quedado esperándote. Una parte que te necesita, especialmente después de todo lo último que hemos vivido. Quisiera poder llegar a Arequipa, encontrarte, abrazarte fuerte y sentir que, aunque sea por un momento, todo aquello que nos ha dolido puede descansar un poquito. Quiero verte, saber de ti, mirarte a los ojos, sentirte cerca. Quiero dejar de imaginar cómo sería abrazarte y simplemente hacerlo. Quiero extrañarte menos, pero también quiero volver a encontrarte. Porque hay algo que me pasa cada vez que voy a verte, siento que no solamente estoy viajando hacia una ciudad, sino que estoy volviendo a encontrar una parte de mi vida que está contigo. Y hay algo que quisiera contarte. Algo que probablemente nunca he sabido explicar, porque ni yo mismo entendía del todo lo que significaba para mí. Cuando era niño, vi una película de Pokémon que, por alguna razón, dejó una huella muy especial en mí.`}]
+      },
+      {
+        title: 'Una historia de niño',
+        parts: [{type:'text',text:`Había una escena en la que el protagonista se encontraba con una chica misteriosa. Ella aparecía de repente, lo miraba y luego se alejaba, perdiéndose entre las calles de una ciudad. Él, intrigado por aquella chica, comenzaba a seguirla, intentando alcanzarla, pero cada vez que parecía estar cerca, ella volvía a desaparecer. No era una persecución por miedo ni por obligación. Había algo especial en ella, algo que despertaba sus ganas de conocerla, de saber quién era y de descubrir por qué había aparecido en su camino. Recuerdo que aquella escena me cautivó de una manera que nunca pude explicar. No era solamente la música, el lugar o la historia. Era esa sensación de estar buscando a alguien que, sin conocerlo del todo, parecía tener algo importante que mostrarte. Y mientras él recorría aquellas calles intentando encontrarla, yo lo miraba con una emoción extraña. Como si una parte de mí quisiera estar viviendo aquella historia. Era solamente un niño viendo una película, pero había algo en esa búsqueda que me parecía profundamente hermoso. Y ahora, tantos años después, me gusta pensar que quizás me quedé mirando aquella escena como quien, sin saberlo, contempla un pequeño pedacito de su propio futuro.`}]
+      },
+      {
+        title: 'El sueño que me llevó a ti',
+        parts: [{type:'text',text:`¿Recuerdas que te conté que soñé que llegaba a Arequipa con mi papá? Fue a partir de aquel sueño que volví a recordar esa escena de mi infancia. Y fue extraño, porque después de tantos años, ese recuerdo que había permanecido guardado en mí comenzó a tener un significado diferente. Recordé a aquel niño que miraba la pantalla, emocionado por una historia que todavía no comprendía del todo. Recordé a aquella chica misteriosa y las ganas que tenía el protagonista de volver a encontrarla. Y entonces, inevitablemente, pensé en ti. Pensé en lo mucho que deseo verte, en las veces que he recorrido tantos kilómetros para encontrarte, en esa emoción que siento cuando sé que cada vez falta menos para llegar a ti. Y fue entonces cuando sentí que, de alguna manera, tú te habías convertido en esa chica de mi historia. Esa chica que no siempre está cerca, a la que no puedo ver cada vez que quisiera, pero a la que mi corazón siempre quiere volver a encontrar.`}]
+      },
+      {
+        title: 'El mundo que descubrí',
+        parts: [{type:'text',text:`Y creo que ahora entiendo un poquito mejor por qué aquella escena me marcó tanto. Porque el protagonista no sabía qué encontraría al final de su búsqueda. No sabía quién era realmente aquella chica ni por qué había aparecido en su camino. Pero decidió seguirla, y gracias a eso terminó descubriendo un lugar secreto, un pequeño mundo lleno de belleza que jamás habría conocido si no se hubiera dejado llevar por aquella curiosidad de encontrarla. Y me gusta pensar que algo parecido me pasó contigo. Porque antes de conocerte había tantas cosas del amor, de mí mismo y de la vida que todavía no conocía. Y de alguna manera, cuando llegaste, me permitiste descubrir sentimientos que nunca había experimentado de esa forma. Contigo encontré un mundo que antes no existía para mí. Uno lleno de recuerdos, de ilusiones, de momentos pequeños que para otros podrían parecer insignificantes, pero que para mí se han convertido en algunos de los tesoros más bonitos de mi vida.`}]
+      },
+      {
+        title: 'Mi chica misteriosa',
+        parts: [{type:'text',text:`Y lo curioso es que aquella escena permaneció en mi memoria durante tantos años, sin que yo supiera realmente por qué. Tal vez porque había algo hermoso en la idea de encontrar a alguien entre tantas personas. Alguien que, sin saberlo, podía cambiar la manera en que veías el mundo. Tal vez porque, incluso desde niño, me emocionaba imaginar que algún día yo también tendría a alguien a quien quisiera encontrar con tantas ganas. Y hoy, cuando pienso en ti, siento que aquel recuerdo finalmente encontró un lugar en mi vida. A veces pienso en las veces que he viajado para verte. En las horas de camino, en los paisajes que van cambiando por la ventana, en esa emoción que comienza a crecer cuando sé que estoy cada vez más cerca de ti. Y me doy cuenta de que, de alguna manera, sigo siendo aquel niño que miraba emocionado una historia sobre alguien que intentaba encontrar a una chica misteriosa. Solo que ahora ya no necesito imaginar cómo sería vivir algo así. Porque ahora conozco su nombre. Conozco su sonrisa, su voz, sus abrazos y esa manera tan suya de hacerme sentir cosas que nadie más ha conseguido. Y esa chica eres tú.`}]
+      },
+      {
+        title: 'Lo que quiero que sepas',
+        parts: [{type:'text',text:`No quiero que pienses que te cuento todo esto para hacer más pequeña tu tristeza. Sé que querernos también implica estar presentes, cumplir lo que prometemos y cuidar lo que sentimos, incluso cuando las circunstancias se complican. Y sé que hay ausencias que duelen aunque existan razones para ellas. Solo quería abrirte una parte muy íntima de mí. Compartirte algo que he llevado guardado desde niño y que, de una manera que nunca habría imaginado, terminó encontrando su significado en ti. Porque eso es lo que siento cuando pienso en volver a verte, unas ganas inmensas de encontrarte otra vez, incluso cuando ya te he encontrado tantas veces. Y aunque esta vez no pueda hacer el viaje que tanto deseaba, quiero que sepas que mis ganas de estar contigo no han cambiado. Quisiera que llegue pronto el día en que pueda abrazarte y ya no tengamos que conformarnos con imaginarnos cerca.`}]
+      },
+      {
+        title: 'Eres mi destino',
+        parts: [
+          {type:'text',text:`A veces me pregunto qué pensaría aquel niño si pudiera verme ahora. Si supiera que, muchos años después de emocionarse con aquella escena, conocería a una chica que le haría sentir algo muchísimo más bonito que cualquier historia que hubiera visto en una pantalla. Quizás sonreiría al descubrir que aquella emoción que nunca supo explicar algún día tendría un nombre, una voz y una persona a quien dedicarle todo ese cariño. Y lo más bonito es que esa persona serías tú.`},
+          {type:'highlight',text:`Eres mi destino, eres mi chica misteriosa.`},
+          {type:'text',text:`No porque seas alguien imposible de alcanzar, ni porque quiera pasar la vida persiguiéndote, sino porque encontrarte se ha convertido en una de las cosas más bonitas que me han pasado. Porque, entre tantas personas, lugares y caminos que pude haber conocido, la vida terminó llevándome hasta ti. Y si algo quisiera conservar de aquella escena para nuestra historia, no sería la distancia ni esa búsqueda que parecía no terminar nunca. Sería la emoción de encontrarse, la alegría de descubrir que al final del camino había alguien que hacía que todo ese recorrido tuviera sentido. Porque, después de todo, lo que más deseo no es pasar la vida buscándote. Es encontrarte una y otra vez, volver a elegirte cada día y, cuando por fin pueda abrazarte, sentir que ya no tengo que seguir buscando ese lugar tan bonito que imaginaba de niño. Porque ese lugar, de alguna manera, lo encontré contigo. Te amo. Y te extraño mucho más de lo que estas palabras pueden explicar.`}
+        ]
+      }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const cover = $('cover'), reader = $('reader'), sheet = $('sheet');
+    const letterBody = $('letterBody'), sheetTitle = $('sheetTitle');
+    const prevButton = $('prevButton'), nextButton = $('nextButton');
+    let index = 0, transitioning = false, opening = false;
+    let localFileURL = null;
+    const audio = new Audio('cancion.mp3');
+    audio.loop = true;
+    audio.volume = 0.36;
+    audio.preload = 'metadata';
+    let musicAvailable = false;
+    let triedDefault = false;
+
+    function pageNumber(n) {return String(n).padStart(2,'0');}
+    function renderPage() {
+      const page=pages[index];
+      sheetTitle.textContent=page.title;
+      letterBody.replaceChildren();
+      for(const part of page.parts){
+        const element=document.createElement(part.type==='highlight'?'div':'p');
+        element.textContent=part.text;
+        if(part.type==='highlight') element.className='highlight';
+        letterBody.appendChild(element);
+      }
+      $('sheetCounter').textContent=`Hoja ${pageNumber(index+1)} · ${pageNumber(pages.length)}`;
+      $('pageMeta').textContent=`${pageNumber(index+1)} / ${pageNumber(pages.length)}`;
+      prevButton.disabled=index===0;
+      nextButton.innerHTML=index===pages.length-1
+        ? 'Volver al sobre <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>'
+        : 'Siguiente hoja <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+      $('progress').replaceChildren();
+      pages.forEach((_,i)=>{
+        const mark=document.createElement('span');
+        mark.className='dot'+(i===index?' active':i<index?' past':'');
+        mark.setAttribute('aria-hidden','true');
+        $('progress').append(mark);
+      });
+    }
+    function scrollToTop(){window.scrollTo({top:0,behavior:'instant'});}
+    function turnPage(next){
+      if(transitioning || next<0 || next>=pages.length) return;
+      transitioning=true;
+      const dir=next>index?'next':'prev';
+      sheet.classList.add('turn-out-'+dir);
+      setTimeout(()=>{
+        index=next;renderPage();scrollToTop();
+        sheet.classList.remove('turn-out-'+dir);
+        sheet.classList.add('turn-in-'+dir);
+        setTimeout(()=>{sheet.classList.remove('turn-in-'+dir);transitioning=false;},520);
+      },290);
+    }
+    function openLetter(){
+      if(opening) return;
+      opening=true;
+      closeSoundPanel();
+      if(musicAvailable) tryPlayMusic();
+      else if(!triedDefault){triedDefault=true;audio.play().then(()=>{musicAvailable=true;refreshMusicUI();}).catch(()=>{});}
+      cover.classList.add('is-opening');
+      $('openButton').disabled=true;
+      setTimeout(()=>{
+        cover.classList.add('vanish');
+        setTimeout(()=>{
+          cover.hidden=true; reader.classList.add('visible');reader.setAttribute('aria-hidden','false');
+          renderPage(); scrollToTop();
+        },450);
+      },1370);
+    }
+    function closeLetter(){
+      reader.classList.remove('visible'); reader.setAttribute('aria-hidden','true');
+      setTimeout(()=>{
+        reader.style.display='none';cover.hidden=false;cover.classList.remove('vanish','is-opening');
+        $('openButton').disabled=false;opening=false;index=0;renderPage();scrollToTop();
+        reader.style.display='';
+      },420);
+    }
+    $('openButton').addEventListener('click',openLetter);
+    $('envelopeButton').addEventListener('click',openLetter);
+    $('closeButton').addEventListener('click',closeLetter);
+    nextButton.addEventListener('click',()=>{if(index===pages.length-1) closeLetter();else turnPage(index+1)});
+    prevButton.addEventListener('click',()=>turnPage(index-1));
+    window.addEventListener('keydown',(e)=>{
+      if(!reader.classList.contains('visible')||e.altKey||e.ctrlKey||e.metaKey)return;
+      if(e.key==='ArrowRight'){e.preventDefault();turnPage(index+1)}
+      if(e.key==='ArrowLeft'){e.preventDefault();turnPage(index-1)}
+    });
+
+    function refreshMusicUI(){
+      const playing=!audio.paused;
+      $('soundLabel').textContent=musicAvailable?(playing?'Pausar música':'Reproducir música'):'Añadir música';
+      $('soundIcon').textContent=playing?'♫':'♪';
+      $('soundButton').classList.toggle('is-playing',playing);
+      $('musicAction').hidden=!musicAvailable;
+      $('musicAction').textContent=playing?'Ⅱ Pausar canción':'▶ Reproducir canción';
+    }
+    function tryPlayMusic(){
+      const result=audio.play();
+      if(result && result.catch)result.catch(()=>{refreshMusicUI();openSoundPanel();});
+    }
+    function openSoundPanel(){$('soundPanel').classList.add('open');$('soundButton').setAttribute('aria-expanded','true');}
+    function closeSoundPanel(){$('soundPanel').classList.remove('open');$('soundButton').setAttribute('aria-expanded','false');}
+    $('soundButton').addEventListener('click',()=>{
+      if(musicAvailable){if(audio.paused)tryPlayMusic();else audio.pause();}
+      else $('soundPanel').classList.toggle('open');
+      if(!musicAvailable){$('soundButton').setAttribute('aria-expanded',String($('soundPanel').classList.contains('open')))}
+    });
+    $('musicAction').addEventListener('click',()=>{if(audio.paused)tryPlayMusic();else audio.pause()});
+    $('audioFile').addEventListener('change',(event)=>{
+      const file=event.target.files?.[0];
+      if(!file)return;
+      audio.pause();
+      if(localFileURL)URL.revokeObjectURL(localFileURL);
+      localFileURL=URL.createObjectURL(file);
+      audio.src=localFileURL;audio.load();musicAvailable=true;
+      $('musicHint').textContent='Canción elegida: '+file.name;
+      closeSoundPanel();tryPlayMusic();refreshMusicUI();
+    });
+    audio.addEventListener('loadedmetadata',()=>{musicAvailable=true;refreshMusicUI()});
+    audio.addEventListener('play',refreshMusicUI);
+    audio.addEventListener('pause',refreshMusicUI);
+    audio.addEventListener('error',()=>{
+      if(!localFileURL)musicAvailable=false;
+      refreshMusicUI();
+    });
+    renderPage();refreshMusicUI();
+    // Pétalos decorativos con valores fijos para un resultado estable.
+    const petals=$('petals');
+    for(let i=0;i<15;i++){
+      const petal=document.createElement('span');petal.className='petal';
+      petal.style.setProperty('--x',((i*37)%97)+'%');
+      petal.style.setProperty('--size',(6+(i*11)%9)+'px');
+      petal.style.setProperty('--rotate',((i*31)%110)+'deg');
+      petal.style.setProperty('--duration',(18+(i*7)%13)+'s');
+      petal.style.setProperty('--delay',(-i*2.6)+'s');
+      petals.appendChild(petal);
+    }
+  </script>
+</body>
+</html>
